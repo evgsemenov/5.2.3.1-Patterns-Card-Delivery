@@ -20,11 +20,16 @@ public class DataGenerator {
         LocalDate date = localDate.plusDays(shift);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String deliveryDate = date.format(formatter);
-
-        // TODO: добавить логику для объявления переменной date и задания её значения, для генерации строки с датой
-        // Вы можете использовать класс LocalDate и его методы для получения и форматирования даты
         return deliveryDate;
     }
+
+    public static int generateRandomDateShift() {
+        int min = 3;
+        int max = 90;
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
+
 
     public static String generateValidCity() {
         String[] citiesList = {"Майкоп", "Горно-Алтайск", "Уфа", "Улан-Удэ", "Махачкала", "Магас", "Нальчик", "Элиста", "Черкесск", "Петрозаводск", "Сыктывкар", "Симферополь", "Йошкар-Ола", "Саранск",
@@ -39,7 +44,7 @@ public class DataGenerator {
     }
 
     public static String generateInvalidCity() {
-        String[] citiesList = {"Вашингтон", "", "12345", "Moscow"};
+        String[] citiesList = {"Вашингтон", "12345", "?:;!", "Moscow", "Масква", "Нижние Топи"};
         Random random = new Random();
         String city = citiesList[random.nextInt(citiesList.length)];
         return city;
