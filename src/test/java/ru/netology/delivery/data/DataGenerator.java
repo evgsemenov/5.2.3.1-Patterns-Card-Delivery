@@ -58,7 +58,7 @@ public class DataGenerator {
 
     public static String generatePhone() {
         Faker faker = new Faker();
-        String phone = faker.numerify("+7##########");
+        String phone = faker.numerify("+7 ### ### ## ##");
         return phone;
     }
 

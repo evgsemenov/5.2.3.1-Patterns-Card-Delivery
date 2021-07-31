@@ -126,21 +126,21 @@ class DeliveryTest {
                 .shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"));
     }
 
-//    @Test                                               //TODO Не знаю, как реализовать проверку номера с пробелами вида "+X XXX XXX XX XX"
-//    void shouldAddPlusToPhoneFieldTest() {
-//        String validPhone = DataGenerator.generatePhone();
-//        String withoutPlusPhone = validPhone.substring(1,12);
-//        $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
-//        $("[data-test-id='phone']").$("[name='phone']").shouldHave(exactText(validPhone));
-//    }
+    @Test
+    void shouldAddPlusToPhoneFieldTest() {
+        String validPhone = DataGenerator.generatePhone();
+        String withoutPlusPhone = validPhone.substring(1,12);
+        $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
+        $("[data-test-id='phone']").$("[name='phone']"). $("[value = validPhone]");
+    }
 
-//@Test
-//void shouldLimitPhoneNumberToElevenNumbersTest() {
-//    String validPhone = DataGenerator.generatePhone();
-//    String invalidPhone = validPhone + "0123456789";
-//    $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
-//    $("[data-test-id='phone']").$("[name='phone']").shouldHave(exactText(validPhone));
-//}
+@Test
+void shouldLimitPhoneNumberToElevenNumbersTest() {
+    String validPhone = DataGenerator.generatePhone();
+    String invalidPhone = validPhone + "0123456789";
+    $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
+    $("[data-test-id='phone']").$("[name='phone']"). $("[value = validPhone]");
+}
 
     @Test
     @Disabled
