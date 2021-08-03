@@ -1,14 +1,10 @@
 package ru.netology.delivery.test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 class DeliveryTest {
@@ -128,7 +124,7 @@ class DeliveryTest {
         validPhone = validPhone.replaceAll("\\s","");
         $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
         $("[data-test-id='phone']").$("[name='phone']").
-                shouldHave(exactText(DataGenerator.formatPhone(validPhone)));
+                shouldHave(value(DataGenerator.formatPhone(validPhone)));
     }
 
 @Test
@@ -137,10 +133,11 @@ void shouldLimitPhoneNumberToElevenNumbersTest() {
     String invalidPhone = validPhone + "0123456789";
     $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
     $("[data-test-id='phone']").$("[class= 'input__control']").
-            shouldHave(exactText(DataGenerator.formatPhone(validPhone)));
+            shouldHave(value(DataGenerator.formatPhone(validPhone)));
 }
 
     @Test
+    @Disabled
     void shouldRequireValidPhoneNumberIfTenNumbersTest() {
         $("[data-test-id='city']").$("[placeholder='Город']").setValue(DataGenerator.generateValidCity());
         $("[data-test-id='date']").$("[placeholder='Дата встречи']").setValue(DataGenerator.
