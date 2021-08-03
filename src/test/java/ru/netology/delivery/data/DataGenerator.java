@@ -58,8 +58,19 @@ public class DataGenerator {
 
     public static String generatePhone() {
         Faker faker = new Faker();
-        String phone = faker.numerify("+7 ### ### ## ##");
+        String phone = faker.numerify("+7##########");
         return phone;
+    }
+
+    public static String formatPhone(){
+        String phone = generatePhone();
+        String substring1 = phone.substring(0,2);
+        String substring2 = phone.substring(2,5);
+        String substring3 = phone.substring(5,8);
+        String substring4 = phone.substring(8,10);
+        String substring5 = phone.substring(10,12);
+        String formattedPhone = substring1 + " " + substring2 + " " + substring3 + " " + substring4 + " " + substring5;
+        return formattedPhone;
     }
 
     public static class Registration {

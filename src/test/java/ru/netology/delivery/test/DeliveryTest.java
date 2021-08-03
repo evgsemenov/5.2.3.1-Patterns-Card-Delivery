@@ -15,8 +15,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 class DeliveryTest {
 
-    private
-
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
@@ -37,9 +35,6 @@ class DeliveryTest {
         var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
         var daysToAddForSecondMeeting = DataGenerator.generateRandomDateShift();
         var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
-
-// TODO при вынесении метода генерации юзера в @BeforeEach в самих тестах не удается вызвать поля .getCity(), getName() и getPhone()
-
         $("[data-test-id='city']").$("[placeholder='Город']").setValue(validUser.getCity());
         $("[data-test-id='date']").$("[placeholder='Дата встречи']").setValue(firstMeetingDate);
         $("[data-test-id= 'name']").$("[name ='name']").setValue(validUser.getName());
@@ -130,8 +125,9 @@ class DeliveryTest {
     void shouldAddPlusToPhoneFieldTest() {
         String validPhone = DataGenerator.generatePhone();
         String withoutPlusPhone = validPhone.substring(1,12);
+        validPhone = validPhone.replaceAll("\\s","");
         $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
-        $("[data-test-id='phone']").$("[name='phone']"). $("[value = validPhone]");
+        $("[data-test-id='phone']").$("[name='phone']"). $("[class= 'input__control']").shouldHave(exactText(DataGenerator.formatPhone()));
     }
 
 @Test
@@ -139,7 +135,7 @@ void shouldLimitPhoneNumberToElevenNumbersTest() {
     String validPhone = DataGenerator.generatePhone();
     String invalidPhone = validPhone + "0123456789";
     $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
-    $("[data-test-id='phone']").$("[name='phone']"). $("[value = validPhone]");
+    $("[data-test-id='phone']").$("[name='phone']"). $("[class= 'input__control']").shouldHave(exactText(DataGenerator.formatPhone()));
 }
 
     @Test
