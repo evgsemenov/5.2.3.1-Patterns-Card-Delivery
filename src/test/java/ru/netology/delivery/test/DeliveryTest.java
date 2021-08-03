@@ -137,7 +137,6 @@ void shouldLimitPhoneNumberToElevenNumbersTest() {
 }
 
     @Test
-    @Disabled
     void shouldRequireValidPhoneNumberIfTenNumbersTest() {
         $("[data-test-id='city']").$("[placeholder='Город']").setValue(DataGenerator.generateValidCity());
         $("[data-test-id='date']").$("[placeholder='Дата встречи']").setValue(DataGenerator.
