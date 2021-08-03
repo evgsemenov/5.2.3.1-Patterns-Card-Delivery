@@ -1,17 +1,15 @@
 package ru.netology.delivery.test;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
-
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
 
 class DeliveryTest {
 
@@ -19,7 +17,8 @@ class DeliveryTest {
     void setup() {
         open("http://localhost:9999");
         $("[data-test-id='date']").$("[class='input__control']").click();
-        $("[data-test-id='date']").$("[class='input__control']").sendKeys(Keys.chord(Keys.CONTROL + "A", Keys.DELETE));
+        $("[data-test-id='date']").$("[class='input__control']").
+                sendKeys(Keys.chord(Keys.CONTROL + "A", Keys.DELETE));
     }
 
     @AfterEach
@@ -50,7 +49,8 @@ class DeliveryTest {
         $("[data-test-id='phone']").$("[name='phone']").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
-        $("[data-test-id= 'replan-notification']").shouldHave(exactText("Необходимо подтверждение\n" + "У вас уже запланирована встреча на другую дату. Перепланировать?\n" + "Перепланировать"));
+        $("[data-test-id= 'replan-notification']").shouldHave(exactText("Необходимо подтверждение\n" +
+                "У вас уже запланирована встреча на другую дату. Перепланировать?\n" + "Перепланировать"));
         $$("button").find(exactText("Перепланировать")).shouldBe(visible).click();
         $("[data-test-id='success-notification']").shouldBe(visible).
                 shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована на " + secondMeetingDate));
@@ -92,8 +92,8 @@ class DeliveryTest {
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
         $("[data-test-id='success-notification']").shouldBe(visible).
-                shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована  на " + DataGenerator.
-                        generateDate(4)));
+                shouldHave(exactText("Успешно!\n" + "Встреча успешно запланирована  на " +
+                        DataGenerator.generateDate(4)));
     }
 
     @Test
@@ -127,7 +127,8 @@ class DeliveryTest {
         String withoutPlusPhone = validPhone.substring(1,12);
         validPhone = validPhone.replaceAll("\\s","");
         $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
-        $("[data-test-id='phone']").$("[name='phone']"). $("[class= 'input__control']").shouldHave(exactText(DataGenerator.formatPhone()));
+        $("[data-test-id='phone']").$("[name='phone']").
+                shouldHave(exactText(DataGenerator.formatPhone(validPhone)));
     }
 
 @Test
@@ -135,7 +136,8 @@ void shouldLimitPhoneNumberToElevenNumbersTest() {
     String validPhone = DataGenerator.generatePhone();
     String invalidPhone = validPhone + "0123456789";
     $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
-    $("[data-test-id='phone']").$("[name='phone']"). $("[class= 'input__control']").shouldHave(exactText(DataGenerator.formatPhone()));
+    $("[data-test-id='phone']").$("[class= 'input__control']").
+            shouldHave(exactText(DataGenerator.formatPhone(validPhone)));
 }
 
     @Test

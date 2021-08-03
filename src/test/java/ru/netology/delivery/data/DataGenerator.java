@@ -62,8 +62,8 @@ public class DataGenerator {
         return phone;
     }
 
-    public static String formatPhone(){
-        String phone = generatePhone();
+    public static String formatPhone(String validPhone){
+        String phone = validPhone;
         String substring1 = phone.substring(0,2);
         String substring2 = phone.substring(2,5);
         String substring3 = phone.substring(5,8);
