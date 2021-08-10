@@ -1,5 +1,7 @@
 package ru.netology.delivery.test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
@@ -8,6 +10,11 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 class DeliveryTest {
+
+    @BeforeAll
+    static void allureSetup() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+    }
 
     @BeforeEach
     void setup() {
@@ -69,7 +76,7 @@ class DeliveryTest {
     void shouldRequireValidDateIfTwoDaysTest() {
         $("[data-test-id='city']").$("[placeholder='Город']").setValue(DataGenerator.generateValidCity());
         $("[data-test-id='date']").$("[class='input__control']").setValue(DataGenerator.
-                        generateDate(-1));
+                generateDate(-1));
         $("[data-test-id= 'name']").$("[name ='name']").setValue(DataGenerator.generateName("ru"));
         $("[data-test-id='phone']").$("[name='phone']").setValue(DataGenerator.generatePhone());
         $("[data-test-id='agreement']").click();
@@ -120,21 +127,21 @@ class DeliveryTest {
     @Test
     void shouldAddPlusToPhoneFieldTest() {
         String validPhone = DataGenerator.generatePhone();
-        String withoutPlusPhone = validPhone.substring(1,12);
-        validPhone = validPhone.replaceAll("\\s","");
+        String withoutPlusPhone = validPhone.substring(1, 12);
+        validPhone = validPhone.replaceAll("\\s", "");
         $("[data-test-id='phone']").$("[name='phone']").setValue(withoutPlusPhone);
         $("[data-test-id='phone']").$("[name='phone']").
                 shouldHave(value(DataGenerator.formatPhone(validPhone)));
     }
 
-@Test
-void shouldLimitPhoneNumberToElevenNumbersTest() {
-    String validPhone = DataGenerator.generatePhone();
-    String invalidPhone = validPhone + "0123456789";
-    $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
-    $("[data-test-id='phone']").$("[class= 'input__control']").
-            shouldHave(value(DataGenerator.formatPhone(validPhone)));
-}
+    @Test
+    void shouldLimitPhoneNumberToElevenNumbersTest() {
+        String validPhone = DataGenerator.generatePhone();
+        String invalidPhone = validPhone + "0123456789";
+        $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
+        $("[data-test-id='phone']").$("[class= 'input__control']").
+                shouldHave(value(DataGenerator.formatPhone(validPhone)));
+    }
 
     @Test
     void shouldRequireValidPhoneNumberIfTenNumbersTest() {
@@ -143,7 +150,7 @@ void shouldLimitPhoneNumberToElevenNumbersTest() {
                 generateDate(DataGenerator.generateRandomDateShift()));
         $("[data-test-id= 'name']").$("[name ='name']").setValue(DataGenerator.generateName("ru"));
         String validPhone = DataGenerator.generatePhone();
-        String invalidPhone = validPhone.substring(0,11);
+        String invalidPhone = validPhone.substring(0, 11);
         $("[data-test-id='phone']").$("[name='phone']").setValue(invalidPhone);
         $("[data-test-id='agreement']").click();
         $$("button").find(exactText("Запланировать")).click();
