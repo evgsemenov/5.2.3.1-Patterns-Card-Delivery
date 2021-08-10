@@ -4,7 +4,8 @@ stack: jdk 11  # версия JDK
 
 branches:
   only:
-    - master  # ветка git
+    - master
+    - allure
 
 build: off  # будем использовать свой скрипт сборки
 
