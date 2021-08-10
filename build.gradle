@@ -12,15 +12,21 @@ compileTestJava.options.encoding = "UTF-8"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
+    compile 'com.epam.reportportal:logger-java-log4j:5.0.3'
+    compile 'org.apache.logging.log4j:log4j-api:2.11.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'com.codeborne:selenide:5.19.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testCompile 'com.epam.reportportal:agent-java-junit5:5.1.0-RC-1'
 }
 
 test {
+    testLogging.showStandardStreams = true
     useJUnitPlatform()
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', true
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }
