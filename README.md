@@ -9,29 +9,40 @@ ReportPortal разворачивается с помощью Docker, Docker-Com
 
 1. Установить [Docker](https://www.docker.com/get-started)
 2. Загрузить последнюю версию docker-compose.yml c помощью команды в терминале 
+
 `curl -LO https://raw.githubusercontent.com/reportportal/reportportal/master/docker-compose.yml`
+
 Также его можно скачать [отсюда](https://github.com/reportportal/reportportal/blob/master/docker-compose.yml).
    
 При развертывании ReportPortal на Windows необходимо внести следующие корректировки в docker-compose.yml:
-a) Для контейнера postgres установить значение **volumes**`- postgres:/var/lib/postgresql/data`
+
+a) Для контейнера postgres установить значение **volumes**
+
+`- postgres:/var/lib/postgresql/data`
+
 b) Раскомментить следующую запись
+
 `# Docker volume for Windows host
 volumes:
 postgres:`
 
 3.  Запустить сервис командой в терминале:
+
 `docker-compose -p reportportal up -d --force-recreate`
   
 4. Открыть в браузере IP-адрес, по которому развернут сервис, с указанием порта 8080 ([по умолчанию](http://localhost:8080))
 Узнать текущий IP адрес хоста можно с помощью следующих команд для Docker:
 
   Mac/Windows: 
+  
 `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' CONTAINER_ID_OR_NAME`
 
    Linux: 
+   
 `curl ifconfig.co`
 
 ReportPortal address:
+
 `http://IP_ADDRESS:8080  ` 
 
 Для авторизации используются следующая пара логин/пароль:
