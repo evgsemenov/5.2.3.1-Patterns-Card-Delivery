@@ -1,15 +1,16 @@
-# Руководство по интеграции ReportPortal (Work in Progress)
+# Руководство по интеграции ReportPortal
 
 Данное руководство является сокращенной адаптацией официальной документации.
-C оригиналом можно ознакомиться [https://reportportal.io/docs][здесь].
+C оригиналом можно ознакомиться [здесь](https://reportportal.io/docs).
 
 ReportPortal разворачивается с помощью Docker, Docker-Compose.
 
 ### Установка c помощью Docker, Docker-Compose
 
-1. Установить [https://www.docker.com/get-started][Docker]
-2. Загрузить последнюю версию docker-compose.yml c помощью команды в терминале `curl -LO https://raw.githubusercontent.com/reportportal/reportportal/master/docker-compose.yml`
-Также его можно скачать [https://github.com/reportportal/reportportal/blob/master/docker-compose.yml][отсюда].
+1. Установить [Docker](https://www.docker.com/get-started)
+2. Загрузить последнюю версию docker-compose.yml c помощью команды в терминале 
+`curl -LO https://raw.githubusercontent.com/reportportal/reportportal/master/docker-compose.yml`
+Также его можно скачать [отсюда](https://github.com/reportportal/reportportal/blob/master/docker-compose.yml).
    
 При развертывании ReportPortal на Windows необходимо внести следующие корректировки в docker-compose.yml:
 a) Для контейнера postgres установить значение **volumes**`- postgres:/var/lib/postgresql/data`
@@ -19,12 +20,16 @@ volumes:
 postgres:`
 
 3.  Запустить сервис командой в терминале:
-    `docker-compose -p reportportal up -d --force-recreate`
+`docker-compose -p reportportal up -d --force-recreate`
   
-4. Открыть в браузере IP-адрес, по которому развернут сервис, с указанием порта 8080 ([http://localhost:8080][по умолчанию])
+4. Открыть в браузере IP-адрес, по которому развернут сервис, с указанием порта 8080 ([по умолчанию](http://localhost:8080))
 Узнать текущий IP адрес хоста можно с помощью следующих команд для Docker:
-   Mac/Windows: `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' CONTAINER_ID_OR_NAME`
-   Linux: `curl ifconfig.co`
+
+  Mac/Windows: 
+`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' CONTAINER_ID_OR_NAME`
+
+   Linux: 
+`curl ifconfig.co`
 
 ReportPortal address:
 `http://IP_ADDRESS:8080  ` 
