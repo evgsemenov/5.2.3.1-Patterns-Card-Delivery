@@ -1,12 +1,15 @@
 package ru.netology.delivery.test;
 
+import com.epam.reportportal.junit5.ReportPortalExtension;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
+@ExtendWith(ReportPortalExtension.class)
 class DeliveryTest {
 
     @BeforeEach
