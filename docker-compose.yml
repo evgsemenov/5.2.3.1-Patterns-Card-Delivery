@@ -124,7 +124,7 @@ services:
       POSTGRES_DB: reportportal
     volumes:
       # For unix host
-      - ./data/postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
       # For windows host
       # - postgres:/var/lib/postgresql/data
     # If you need to access the DB locally. Could be a security risk to expose DB.
@@ -303,7 +303,7 @@ services:
       retries: 3
     restart: always
 
-  # Docker volume for Windows host
-#volumes:
-#  postgres:
+#   Docker volume for Windows host
+volumes:
+  postgres:
 #  minio:
